@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { JSX } from "react";
+import Link from "next/link";
 
 type Props = {
   title: string;
@@ -19,7 +19,7 @@ const FormBox = (props: Props) => {
         <props.form />
         <p className="text-center">
           {props.text}{" "}
-          <Link to={props.link} className="text-blue">
+          <Link href={props.link} className="text-blue">
             {props.linkText}
           </Link>
         </p>

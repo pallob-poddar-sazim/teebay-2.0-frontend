@@ -1,6 +1,8 @@
+"use client";
+
 import { useState } from "react";
-import VisibilityIcon from "../../assets/icons/visibility-icon.svg?react";
-import VisibilityOffIcon from "../../assets/icons/visibility-off-icon.svg?react";
+import VisibilityIcon from "@/assets/icons/visibility-icon.svg";
+import VisibilityOffIcon from "@/assets/icons/visibility-off-icon.svg";
 
 type Props = {
   placeholder?: string;

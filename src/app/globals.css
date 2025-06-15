@@ -1,2 +1,18 @@
 @import "tailwindcss";
 
+@theme {
+  --color-purple: #6766f5;
+  --color-raspberry: #d3455b;
+  --color-gray: #c3cfd9;
+  --color-slate-gray: #6f7d89;
+  --color-jet-black: #293845;
+  --color-blue: #3d92dc;
+}
+
+.button-primary {
+  @apply px-4 py-2 rounded-md text-white cursor-pointer bg-purple;
+}
+
+.button-secondary {
+  @apply px-4 py-2 rounded-md text-white cursor-pointer bg-raspberry;
+}

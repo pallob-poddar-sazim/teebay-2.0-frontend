@@ -1,12 +1,14 @@
+"use client";
+
 import { Controller, useForm } from "react-hook-form";
 import Input from "../atoms/Input";
 import Button from "../atoms/Button";
-import { SIGN_UP } from "../../graphql/mutations/users";
-import { useMutation } from "@apollo/client";
 import { BeatLoader } from "react-spinners";
+import { useMutation } from "@apollo/client";
+import { SIGN_UP } from "@/graphql/mutations/users";
+import IUser from "@/interfaces/IUser";
 import { toast } from "react-toastify";
-import IUser from "../../interfaces/IUser";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 interface ISignupResponse {
   success: boolean;
@@ -35,7 +37,7 @@ const SignupForm = () => {
   });
 
   const [signUp, { loading, error }] = useMutation(SIGN_UP);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   if (error) {
     toast.error(error.message);
@@ -43,7 +45,7 @@ const SignupForm = () => {
 
   const handleResponse = (data: ISignupResponse) => {
     if (data.success) {
-      navigate("/signin");
+      router.prefetch("/signin");
     } else {
       toast.error(data.message, { theme: "colored" });
     }

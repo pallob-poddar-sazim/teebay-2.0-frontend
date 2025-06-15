@@ -1,5 +1,5 @@
-import SignupForm from "../organisms/SignupForm";
-import FormBox from "../templates/FormBox";
+import SignupForm from "@/components/organisms/SignupForm";
+import FormBox from "@/components/templates/FormBox";
 
 const Signup = () => {
   return (

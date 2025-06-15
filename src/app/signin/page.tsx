@@ -1,5 +1,5 @@
-import SigninForm from "../organisms/SigninForm";
-import FormBox from "../templates/FormBox";
+import SigninForm from "@/components/organisms/SigninForm";
+import FormBox from "@/components/templates/FormBox";
 
 const Signin = () => {
   return (
@@ -7,7 +7,7 @@ const Signin = () => {
       title="Sign In"
       form={SigninForm}
       text="Don't have an account?"
-      link="/"
+      link="/signup"
       linkText="Sign Up"
     />
   );

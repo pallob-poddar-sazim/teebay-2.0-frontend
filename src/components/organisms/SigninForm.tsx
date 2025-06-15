@@ -1,14 +1,16 @@
+"use client";
+
 import { Controller, useForm } from "react-hook-form";
 import Input from "../atoms/Input";
 import Button from "../atoms/Button";
-import { SIGN_IN } from "../../graphql/mutations/users";
+import { SIGN_IN } from "@/graphql/mutations/users";
 import { useMutation } from "@apollo/client";
 import { BeatLoader } from "react-spinners";
 import { toast } from "react-toastify";
-import IUser from "../../interfaces/IUser";
-import { useNavigate } from "react-router-dom";
-import { GET_LOCAL_USER } from "../../graphql/queries/users";
-import client from "../../apollo/apolloClient";
+import IUser from "@/interfaces/IUser";
+import { GET_LOCAL_USER } from "@/graphql/queries/users";
+import client from "@/lib/apollo/apolloClient";
+import { useRouter } from "next/navigation";
 
 interface ISigninResponse {
   success: boolean;
@@ -31,7 +33,7 @@ const SigninForm = () => {
   });
 
   const [signIn, { loading, error }] = useMutation(SIGN_IN);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   if (error) {
     toast.error(error.message);
@@ -43,7 +45,7 @@ const SigninForm = () => {
         query: GET_LOCAL_USER,
         data: { localUser: data.data },
       });
-      navigate(`/users/${data.data.id}/products`);
+      router.push(`/users/${data.data.id}/products`);
     } else {
       toast.error(data.message, { theme: "colored" });
     }

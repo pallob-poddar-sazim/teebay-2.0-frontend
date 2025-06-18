@@ -16,14 +16,7 @@ import { useRouter } from "next/navigation";
 import { useQuery } from "@apollo/client";
 import { GET_LOCAL_USER } from "@/graphql/queries/users";
 
-type Props = {
-  title?: string;
-  products?: IProduct[];
-  onDelete?: (id: string) => void;
-  onCardClick?: (product: IProduct) => void;
-};
-
-const CardList = (props: Props) => {
+const ProductsBySeller = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteProductId, setDeleteProductId] = useState("");
 
@@ -109,9 +102,7 @@ const CardList = (props: Props) => {
         />
       )}
       <div className="mx-auto max-w-4/5 md:max-w-3/5">
-        <h1 className="text-3xl text-jet-black text-center m-8">
-          {props.title}
-        </h1>
+        <h1 className="text-3xl text-jet-black text-center m-8">MY PRODUCTS</h1>
         <div className="flex flex-col gap-6">
           {products.map((product: IProduct) => (
             <Card
@@ -127,4 +118,4 @@ const CardList = (props: Props) => {
   );
 };
 
-export default CardList;
+export default ProductsBySeller;

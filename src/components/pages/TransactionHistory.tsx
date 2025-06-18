@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import Button from "../atoms/Button";
-import CardList from "../templates/CardList";
+import CardList from "../templates/ProductsBySeller";
 import { useQuery } from "@apollo/client";
 import { GET_PURCHASES_BY_USER_ID } from "../../graphql/queries/purchases";
 import { GET_RENTALS_BY_USER_ID } from "../../graphql/queries/rentals";
@@ -44,7 +44,11 @@ const TransactionHistory = () => {
           <Button
             key={tab}
             text={tab.charAt(0).toUpperCase() + tab.slice(1)}
-            className={activeTab === tab ? "border-b-4 border-purple w-1/10" : "cursor-pointer w-1/10"}
+            className={
+              activeTab === tab
+                ? "border-b-4 border-purple w-1/10"
+                : "cursor-pointer w-1/10"
+            }
             onClick={() => setSearchParams({ tab })}
           />
         ))}

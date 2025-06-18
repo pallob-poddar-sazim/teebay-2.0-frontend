@@ -9,6 +9,7 @@ import { SIGN_UP } from "@/graphql/mutations/users";
 import IUser from "@/interfaces/IUser";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 interface ISignupResponse {
   success: boolean;
@@ -39,13 +40,17 @@ const SignupForm = () => {
   const [signUp, { loading, error }] = useMutation(SIGN_UP);
   const router = useRouter();
 
+  useEffect(() => {
+    router.prefetch("/signin");
+  }, [router]);
+
   if (error) {
     toast.error(error.message);
   }
 
   const handleResponse = (data: ISignupResponse) => {
     if (data.success) {
-      router.prefetch("/signin");
+      router.push("/signin");
     } else {
       toast.error(data.message, { theme: "colored" });
     }

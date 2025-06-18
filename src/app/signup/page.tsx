@@ -1,7 +1,7 @@
 import SignupForm from "@/components/organisms/SignupForm";
 import FormBox from "@/components/templates/FormBox";
 
-const Signup = () => {
+export default function Page() {
   return (
     <FormBox
       title="Sign Up"
@@ -12,5 +12,3 @@ const Signup = () => {
     />
   );
 };
-
-export default Signup;

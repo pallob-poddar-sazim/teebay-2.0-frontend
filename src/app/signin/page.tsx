@@ -1,7 +1,7 @@
 import SigninForm from "@/components/organisms/SigninForm";
 import FormBox from "@/components/templates/FormBox";
 
-const Signin = () => {
+export default function Page() {
   return (
     <FormBox
       title="Sign In"
@@ -12,5 +12,3 @@ const Signin = () => {
     />
   );
 };
-
-export default Signin;

@@ -11,6 +11,7 @@ import IUser from "@/interfaces/IUser";
 import { GET_LOCAL_USER } from "@/graphql/queries/users";
 import client from "@/lib/apollo/apolloClient";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 interface ISigninResponse {
   success: boolean;
@@ -35,6 +36,10 @@ const SigninForm = () => {
   const [signIn, { loading, error }] = useMutation(SIGN_IN);
   const router = useRouter();
 
+  useEffect(() => {
+    router.prefetch("/dashboard");
+  }, [router]);
+
   if (error) {
     toast.error(error.message);
   }
@@ -45,7 +50,7 @@ const SigninForm = () => {
         query: GET_LOCAL_USER,
         data: { localUser: data.data },
       });
-      router.push(`/users/${data.data.id}/products`);
+      router.push(`/dashboard`);
     } else {
       toast.error(data.message, { theme: "colored" });
     }

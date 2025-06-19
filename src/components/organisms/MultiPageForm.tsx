@@ -1,18 +1,20 @@
-import { useState } from "react";
+"use client";
+
+import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Input from "../atoms/Input";
 import Button from "../atoms/Button";
 import MultiSelect from "../molecules/MultiSelect";
 import Select from "../molecules/Select";
 import TextArea from "../atoms/TextArea";
-import { GET_ALL_CATEGORIES } from "../../graphql/queries/categories";
+import { GET_ALL_CATEGORIES } from "@/graphql/queries/categories";
 import { useQuery, useMutation } from "@apollo/client";
-import { useNavigate } from "react-router-dom";
-import { CREATE_PRODUCT } from "../../graphql/mutations/products";
+import { CREATE_PRODUCT } from "@/graphql/mutations/products";
 import { toast } from "react-toastify";
-import IProduct from "../../interfaces/IProduct";
+import IProduct from "@/interfaces/IProduct";
 import { BeatLoader } from "react-spinners";
-import { GET_LOCAL_USER } from "../../graphql/queries/users";
+import { GET_LOCAL_USER } from "@/graphql/queries/users";
+import { useRouter } from "next/navigation";
 
 interface IProductResponse {
   success: boolean;
@@ -52,11 +54,15 @@ const MultiPageForm = () => {
       rentOption: "",
     },
   });
-  const navigate = useNavigate();
+  const router = useRouter();
   const [step, setStep] = useState(0);
   const { data: categoryData } = useQuery(GET_ALL_CATEGORIES);
   const [createProduct, { loading, error }] = useMutation(CREATE_PRODUCT);
   const { data: user } = useQuery(GET_LOCAL_USER);
+
+  useEffect(() => {
+    router.prefetch("/dashboard");
+  }, [router]);
 
   const formValues = watch();
 
@@ -74,7 +80,7 @@ const MultiPageForm = () => {
 
   const handleResponse = (data: IProductResponse) => {
     if (data.success) {
-      navigate(`/users/${user.localUser.id}/products`);
+      router.push("/dashboard");
     } else {
       toast.error(data.message, { theme: "colored" });
     }

@@ -1,6 +1,6 @@
-import IProduct from "../../interfaces/IProduct";
+import IProduct from "@/interfaces/IProduct";
 import Button from "../atoms/Button";
-import DeleteIcon from "../../assets/icons/delete-icon.svg?react";
+import DeleteIcon from "@/assets/icons/delete-icon.svg";
 
 type Props = {
   product: IProduct;

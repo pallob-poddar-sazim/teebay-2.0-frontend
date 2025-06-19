@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import Button from "../atoms/Button";
-import CloseIcon from "../../assets/icons/close-icon.svg?react";
-import UnfoldMoreIcon from "../../assets/icons/unfold-more-icon.svg?react";
+import CloseIcon from "@/assets/icons/close-icon.svg";
+import UnfoldMoreIcon from "@/assets/icons/unfold-more-icon.svg";
 
 type Option = {
   id: string;
@@ -17,7 +17,9 @@ type Props = {
 };
 
 const MultiSelect = (props: Props) => {
-  const [selectedOptions, setSelectedOptions] = useState<Option[]>(props.defaultSelected || []);
+  const [selectedOptions, setSelectedOptions] = useState<Option[]>(
+    props.defaultSelected || []
+  );
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -25,13 +27,13 @@ const MultiSelect = (props: Props) => {
     if (props.defaultSelected?.length) {
       props.onChange(props.defaultSelected);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const selectOption = (option: Option) => {
-    if (!selectedOptions.some(selected => selected.id === option.id)) {
+    if (!selectedOptions.some((selected) => selected.id === option.id)) {
       const newSelectedOptions = [...selectedOptions, option];
       setSelectedOptions(newSelectedOptions);
       props.onChange(newSelectedOptions);

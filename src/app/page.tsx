@@ -1,5 +1,5 @@
-export default function Home() {
-  return (
-    <></>
-  );
+import IndexPage from "@/components/guards/IndexPage";
+
+export default function Page() {
+  return <IndexPage />;
 }

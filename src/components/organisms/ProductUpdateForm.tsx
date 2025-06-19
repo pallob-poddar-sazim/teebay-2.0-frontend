@@ -1,21 +1,21 @@
+"use client";
+
 import { Controller, useForm } from "react-hook-form";
-import IProduct from "../../interfaces/IProduct";
+import IProduct from "@/interfaces/IProduct";
 import Input from "../atoms/Input";
 import MultiSelect from "../molecules/MultiSelect";
-import { GET_ALL_CATEGORIES } from "../../graphql/queries/categories";
+import { GET_ALL_CATEGORIES } from "@/graphql/queries/categories";
 import { useQuery, useMutation } from "@apollo/client";
 import TextArea from "../atoms/TextArea";
 import Select from "../molecules/Select";
 import Button from "../atoms/Button";
 import { BeatLoader } from "react-spinners";
-import { UPDATE_PRODUCT } from "../../graphql/mutations/products";
-import { GET_LOCAL_USER } from "../../graphql/queries/users";
-import { useNavigate } from "react-router-dom";
+import { UPDATE_PRODUCT } from "@/graphql/mutations/products";
+import { GET_LOCAL_USER } from "@/graphql/queries/users";
 import { toast } from "react-toastify";
-
-type Props = {
-  product: IProduct;
-};
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { GET_SELECTED_PRODUCT } from "@/graphql/queries/products";
 
 interface IProductResponse {
   success: boolean;
@@ -32,7 +32,10 @@ type FormData = {
   rentOption: string;
 };
 
-const ProductUpdateForm = (props: Props) => {
+const ProductUpdateForm = () => {
+  const { data: ProductDetails } = useQuery(GET_SELECTED_PRODUCT);
+  const product: IProduct = ProductDetails?.selectedProduct;
+
   const {
     control,
     handleSubmit,
@@ -40,18 +43,22 @@ const ProductUpdateForm = (props: Props) => {
     formState: { errors },
   } = useForm<FormData>({
     defaultValues: {
-      title: props.product.title,
-      categoryIds: props.product.categories.map((category) => category.id),
-      description: props.product.description,
-      price: props.product.price,
-      rent: props.product.rent,
-      rentOption: props.product.rentOption,
+      title: product?.title,
+      categoryIds: product?.categories?.map((category) => category.id),
+      description: product?.description,
+      price: product?.price,
+      rent: product?.rent,
+      rentOption: product?.rentOption,
     },
   });
   const { data: categoryData } = useQuery(GET_ALL_CATEGORIES);
   const { data: user } = useQuery(GET_LOCAL_USER);
   const [updateProduct, { loading }] = useMutation(UPDATE_PRODUCT);
-  const navigate = useNavigate();
+  const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch("/dashboard");
+  }, [router]);
 
   const categoryOptions = categoryData?.getAllCategories?.data || [];
 
@@ -63,7 +70,7 @@ const ProductUpdateForm = (props: Props) => {
 
   const handleResponse = (data: IProductResponse) => {
     if (data.success) {
-      navigate(`/users/${user.localUser.id}/products`);
+      router.push("/dashboard");
     } else {
       toast.error(data.message, { theme: "colored" });
     }
@@ -72,7 +79,7 @@ const ProductUpdateForm = (props: Props) => {
   const handlerOnSubmit = async (formData: FormData) => {
     try {
       const variables = {
-        id: props.product.id,
+        id: product?.id,
         title: formData.title,
         description: formData.description,
         price: Number(formData.price),
@@ -130,7 +137,7 @@ const ProductUpdateForm = (props: Props) => {
                   selected.map((option) => option.id)
                 );
               }}
-              defaultSelected={props.product.categories}
+              defaultSelected={product?.categories}
               error={errors.categoryIds && true}
             />
           )}

@@ -56,7 +56,9 @@ const MultiPageForm = () => {
   });
   const router = useRouter();
   const [step, setStep] = useState(0);
-  const { data: categoryData } = useQuery(GET_ALL_CATEGORIES);
+  const { data: categoryData } = useQuery(GET_ALL_CATEGORIES, {
+    fetchPolicy: "network-only",
+  });
   const [createProduct, { loading, error }] = useMutation(CREATE_PRODUCT);
   const { data: user } = useQuery(GET_LOCAL_USER);
 

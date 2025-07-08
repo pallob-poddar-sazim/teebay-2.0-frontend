@@ -5,7 +5,7 @@ import Card from "../organisms/Card";
 import { useQuery } from "@apollo/client";
 import { GET_PURCHASES_BY_USER_ID } from "@/graphql/queries/purchases";
 import { GET_RENTALS_BY_USER_ID } from "@/graphql/queries/rentals";
-import IPurchase from "@/interfaces/Ipurchase";
+import IPurchase from "@/interfaces/IPurchase";
 import { GET_LOCAL_USER } from "@/graphql/queries/users";
 import IRental from "@/interfaces/IRental";
 import { useSearchParams } from "next/navigation";

@@ -8,11 +8,14 @@ import { GET_SELECTED_PRODUCT } from "@/graphql/queries/products";
 import { CREATE_RENTAL } from "@/graphql/mutations/rental";
 import { GET_LOCAL_USER } from "@/graphql/queries/users";
 import { CREATE_PURCHASE } from "@/graphql/mutations/purchase";
+import { GET_MESSAGES } from "@/graphql/queries/messages";
 import { toast } from "react-toastify";
 import Modal from "../organisms/Modal";
 import Chat from "../organisms/Chat";
+import Chat from "../organisms/Chat";
 
 const ProductDetailsLayout = () => {
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const { data: productData } = useQuery(GET_SELECTED_PRODUCT);
   const [modalVariant, setModalVariant] = useState<"buy" | "rent" | null>(null);

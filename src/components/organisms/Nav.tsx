@@ -36,6 +36,9 @@ const Nav = () => {
       <Link href={"/products/creation"} className="text-blue">
         <Button text="ADD PRODUCT" variant="button-primary" />
       </Link>
+      <Link href={"/products/bulk-creation"} className="text-blue">
+        <Button text="BULK CREATE" variant="button-primary" />
+      </Link>
       <Button
         text="LOGOUT"
         variant="button-secondary"

@@ -46,4 +46,4 @@ function PasswordInput({ className, type, ...props }: React.ComponentProps<"inpu
   );
 }
 
-export { PasswordInput };
+export default PasswordInput;

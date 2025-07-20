@@ -1,4 +1,4 @@
-import NonUserAuth from "@/components/guards/NonUserAuth";
+import NonUserAuth from "@/shared/components/wrappers/AuthGuard/NonUserAuth";
 import React from "react";
 
 type Props = {

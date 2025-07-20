@@ -1,4 +1,4 @@
-import IndexPage from "@/components/guards/IndexPage";
+import IndexPage from "@/shared/components/wrappers/AuthGuard/IndexPage";
 
 export default function Page() {
   return <IndexPage />;

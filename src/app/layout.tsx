@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ApolloWrapper from "@/providers/ApolloWrapper";
-import ToastContainerWrapper from "@/providers/ToastContainerWrapper";
+import ApolloWrapper from "@/shared/components/wrappers/ApolloWrapper/ApolloWrapper";
+import Toaster from "@/shared/components/wrappers/Toaster/Toaster";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,8 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Teebay",
-  description:
-    "A marketplace where anyone can buy, sell, borrow and rent products.",
+  description: "A marketplace where anyone can buy, sell, borrow and rent products.",
 };
 
 export default function RootLayout({
@@ -27,11 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ApolloWrapper>
-          <ToastContainerWrapper />
+          <Toaster />
           {children}
         </ApolloWrapper>
       </body>

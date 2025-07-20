@@ -5,7 +5,7 @@ import { BeatLoader } from "react-spinners";
 import { useSignupForm } from "./SignupForm.hooks";
 import { Button } from "@/shared/components/shadui/button";
 import { Input } from "@/shared/components/shadui/input";
-import { PasswordInput } from "@/shared/components/PasswordInput/PasswordInput";
+import PasswordInput from "@/shared/components/PasswordInput";
 
 const SignupForm = () => {
   const { form, onSubmit } = useSignupForm();

@@ -1,26 +1,15 @@
 import { useEffect, useRef } from "react";
-import Button from "../atoms/Button";
-import Input from "../atoms/Input";
 import { Controller, useForm } from "react-hook-form";
+import { Input } from "../shadui/input";
+import { Button } from "../shadui/button";
+import { TModalProps, TRentalFormFields } from "./Modal.types";
 
-type Props = {
-  variant: "buy" | "rent" | "delete";
-  onConfirm: (rentStartDate?: Date, rentEndDate?: Date) => void;
-  onClose: () => void;
-};
-
-type FormData = {
-  rentStartDate: Date;
-  rentEndDate: Date;
-};
-
-const Modal = (props: Props) => {
+const Modal = (props: TModalProps) => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
-
+  } = useForm<TRentalFormFields>();
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const buyText = "Are you sure you want to buy this product?";
@@ -29,10 +18,7 @@ const Modal = (props: Props) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node)
-      ) {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
         props.onClose();
       }
     };
@@ -40,10 +26,9 @@ const Modal = (props: Props) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.onClose]);
 
-  const handlerOnSubmit = async (formData: FormData) => {
+  const handlerOnSubmit = async (formData: TRentalFormFields) => {
     props.onConfirm(formData.rentStartDate, formData.rentEndDate);
   };
 
@@ -51,11 +36,7 @@ const Modal = (props: Props) => {
     <div className="fixed inset-0 flex items-center justify-center bg-gray/50">
       <div ref={modalRef} className="bg-white px-5 pt-8 pb-4 shadow-lg">
         <p className="text-xl">
-          {props.variant === "buy"
-            ? buyText
-            : props.variant === "rent"
-            ? rentText
-            : deleteText}
+          {props.variant === "buy" ? buyText : props.variant === "rent" ? rentText : deleteText}
         </p>
 
         <form onSubmit={handleSubmit(handlerOnSubmit)}>
@@ -71,35 +52,24 @@ const Modal = (props: Props) => {
                     validate: (value) => {
                       const selectedDate = new Date(value);
                       const now = new Date();
-                      now.setMinutes(
-                        now.getMinutes() - now.getTimezoneOffset()
-                      );
+                      now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
 
-                      return (
-                        selectedDate >= now ||
-                        "Start date must be in the future"
-                      );
+                      return selectedDate >= now || "Start date must be in the future";
                     },
                   }}
                   render={({ field }) => (
                     <Input
                       type="datetime-local"
-                      field={{
+                      {...{
                         ...field,
-                        value: field.value
-                          ? new Date(field.value).toISOString().slice(0, 16)
-                          : "",
-                        onChange: (e) =>
-                          field.onChange(new Date(e.target.value)),
+                        value: field.value ? new Date(field.value).toISOString().slice(0, 16) : "",
+                        onChange: (e) => field.onChange(new Date(e.target.value)),
                       }}
-                      error={!!errors.rentStartDate}
                     />
                   )}
                 />
                 {errors.rentStartDate && (
-                  <p className="text-sm text-red-500 my-1">
-                    {errors.rentStartDate.message}
-                  </p>
+                  <p className="text-sm text-red-500 my-1">{errors.rentStartDate.message}</p>
                 )}
               </div>
               <div className="flex flex-col">
@@ -111,58 +81,38 @@ const Modal = (props: Props) => {
                     required: "To is required",
                     validate: (value) => {
                       const selectedDate = new Date(value);
-                      const startDate = new Date(
-                        control._getWatch("rentStartDate")
-                      );
+                      const startDate = new Date(control._getWatch("rentStartDate"));
 
-                      return (
-                        selectedDate >= startDate ||
-                        "End date must be after start date"
-                      );
+                      return selectedDate >= startDate || "End date must be after start date";
                     },
                   }}
                   render={({ field }) => (
                     <Input
                       type="datetime-local"
-                      field={{
+                      {...{
                         ...field,
-                        value: field.value
-                          ? new Date(field.value).toISOString().slice(0, 16)
-                          : "",
-                        onChange: (e) =>
-                          field.onChange(new Date(e.target.value)),
+                        value: field.value ? new Date(field.value).toISOString().slice(0, 16) : "",
+                        onChange: (e) => field.onChange(new Date(e.target.value)),
                       }}
-                      error={!!errors.rentEndDate}
                     />
                   )}
                 />
                 {errors.rentEndDate && (
-                  <p className="text-sm text-red-500 my-1">
-                    {errors.rentEndDate.message}
-                  </p>
+                  <p className="text-sm text-red-500 my-1">{errors.rentEndDate.message}</p>
                 )}
               </div>
             </div>
           )}
           <div className="flex items-center justify-end gap-4 mt-12">
-            <Button
-              variant="button-secondary"
-              text={props.variant === "rent" ? "Go back" : "No"}
-              onClick={props.onClose}
-            />
+            <Button variant={"destructive"} onClick={props.onClose}>
+              {props.variant === "rent" ? "Go back" : "No"}
+            </Button>
             {props.variant === "rent" ? (
-              <Button
-                variant="button-primary"
-                text="Confirm rent"
-                type="submit"
-              />
+              <Button type="submit">Confirm rent</Button>
             ) : (
-              <Button
-                type="button"
-                variant="button-primary"
-                text="Yes"
-                onClick={() => props.onConfirm()}
-              />
+              <Button type="button" onClick={() => props.onConfirm()}>
+                Yes
+              </Button>
             )}
           </div>
         </form>

@@ -1,11 +1,9 @@
-import ProductsBySeller from "@/components/templates/ProductsBySeller";
-import Nav from "@/components/organisms/Nav";
+import ProductsBySellerContainer from "@/modules/dashboard/containers";
 
 export default function Page() {
   return (
     <>
-      <Nav />
-      <ProductsBySeller />
+      <ProductsBySellerContainer />
     </>
   );
 }

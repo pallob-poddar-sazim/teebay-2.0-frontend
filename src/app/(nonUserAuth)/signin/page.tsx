@@ -1,9 +1,9 @@
-import SigninForm from "@/components/organisms/SigninForm";
-import FormBox from "@/components/templates/FormBox";
+import SigninForm from "@/modules/signin/components";
+import FormContainer from "@/shared/containers/FormContainer";
 
 export default function Page() {
   return (
-    <FormBox
+    <FormContainer
       title="Sign In"
       form={SigninForm}
       text="Don't have an account?"
@@ -11,4 +11,4 @@ export default function Page() {
       linkText="Sign Up"
     />
   );
-};
+}

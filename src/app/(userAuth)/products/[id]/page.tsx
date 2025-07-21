@@ -1,7 +1,7 @@
-import ProductDetailsLayout from "@/components/templates/ProductDetailsLayout";
+import ProductDetailsContainer from "@/modules/product-details/containers";
 
 const ProductDetails = () => {
-  return <ProductDetailsLayout />;
+  return <ProductDetailsContainer />;
 };
 
 export default ProductDetails;

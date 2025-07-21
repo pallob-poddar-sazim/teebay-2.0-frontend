@@ -35,15 +35,15 @@ export const useProductUpdateForm = (product: IProduct) => {
         ...values,
         sellerId: user?.localUser.id,
       };
-      console.log(variables);
 
       const { data } = await updateProduct({
         variables: variables,
         fetchPolicy: "network-only",
       });
+
       handleResponse(data.updateProduct);
     } catch (err) {
-      console.error("Error signing up:", err);
+      console.error(err);
     }
   };
 

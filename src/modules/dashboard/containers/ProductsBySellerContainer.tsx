@@ -4,12 +4,10 @@ import { IProduct } from "@/shared/typedefs";
 import Card from "@/shared/components/Card";
 import { useState } from "react";
 import Modal from "@/shared/components/Modal/Modal";
-import {
-  useDeleteProduct,
-  useGetProductsBySeller,
-  useSelectApolloClientProduct,
-} from "../hooks/ProductsBySeller.hooks";
+import { useDeleteProduct, useGetProductsBySeller } from "../hooks/ProductsBySeller.hooks";
 import { UUID } from "crypto";
+import { useSelectApolloClientProduct } from "@/shared/hooks/useSelectApolloClientProduct";
+import { useRouter } from "next/navigation";
 
 const ProductsBySellerContainer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,6 +15,7 @@ const ProductsBySellerContainer = () => {
   const { products } = useGetProductsBySeller();
   const { onConfirm } = useDeleteProduct(deleteProductId);
   const { selectApolloClientProduct } = useSelectApolloClientProduct();
+  const router = useRouter();
 
   const handleConfirm = async () => {
     await onConfirm();
@@ -26,6 +25,11 @@ const ProductsBySellerContainer = () => {
   const handleDelete = async (id: UUID) => {
     setDeleteProductId(id);
     setIsModalOpen(true);
+  };
+
+  const handleCardClick = (product: IProduct) => {
+    selectApolloClientProduct(product);
+    router.push(`/products/${product.id}/update`);
   };
 
   return (
@@ -41,7 +45,7 @@ const ProductsBySellerContainer = () => {
               key={product.id}
               product={product}
               onDelete={() => handleDelete(product.id)}
-              onCardClick={(product) => selectApolloClientProduct(product)}
+              onCardClick={handleCardClick}
             />
           ))}
         </div>

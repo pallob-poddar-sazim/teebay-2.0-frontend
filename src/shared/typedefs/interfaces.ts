@@ -8,6 +8,11 @@ export interface IUser {
   address: string;
 }
 
+export interface ICategory {
+  id: string;
+  name: string;
+}
+
 export interface IProduct {
   id: UUID;
   title: string;

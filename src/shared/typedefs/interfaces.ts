@@ -16,7 +16,7 @@ export interface IProduct {
   rent: number;
   rentOption: "hr" | "day";
   categories: {
-    id: UUID;
+    id: string;
     name: string;
   }[];
   seller: IUser;

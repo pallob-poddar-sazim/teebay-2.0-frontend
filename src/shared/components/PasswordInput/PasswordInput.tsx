@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "../shadui/button";
 import { Input } from "../shadui/input";
 
-function PasswordInput({ className, type, ...props }: React.ComponentProps<"input">) {
+function PasswordInput({ className, ...props }: React.ComponentProps<"input">) {
   const [showPassword, setShowPassword] = useState(false);
   const disabled = props.value === "" || props.value === undefined || props.disabled;
 

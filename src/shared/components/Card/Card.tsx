@@ -1,4 +1,4 @@
-import DeleteIcon from "@/assets/icons/delete-icon.svg";
+import { Trash } from "lucide-react";
 import { Button } from "../shadui/button";
 import { TCardProps } from "./Card.types";
 
@@ -20,7 +20,7 @@ const Card = (props: TCardProps) => {
               props.onDelete?.(props.product.id);
             }}
           >
-            <DeleteIcon />
+            <Trash />
           </Button>
         )}
       </div>

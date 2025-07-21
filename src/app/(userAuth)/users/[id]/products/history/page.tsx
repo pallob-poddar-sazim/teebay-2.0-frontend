@@ -1,5 +1,5 @@
-import TransactionHistory from "@/components/templates/TransactionHistory";
-import Tab from "@/components/organisms/Tab";
+import TransactionHistory from "@/modules/transaction-history/containers";
+import Tab from "@/shared/components/Tab";
 
 export default async function Page() {
   return (

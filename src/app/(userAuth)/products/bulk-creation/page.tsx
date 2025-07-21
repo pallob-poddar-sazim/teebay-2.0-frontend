@@ -1,5 +1,5 @@
-import BulkCreation from "@/components/organisms/BulkCreation";
+import ProductBulkCreationContainer from "@/modules/product-bulk-creation/containers";
 
 export default function Page() {
-  return <BulkCreation />;
+  return <ProductBulkCreationContainer />;
 }

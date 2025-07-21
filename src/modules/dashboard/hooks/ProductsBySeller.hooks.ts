@@ -1,10 +1,8 @@
 import { DELETE_PRODUCT } from "@/shared/graphql/mutations/products";
-import { GET_MY_PRODUCTS, GET_SELECTED_PRODUCT } from "@/shared/graphql/queries/products";
+import { GET_MY_PRODUCTS } from "@/shared/graphql/queries/products";
 import { GET_LOCAL_USER } from "@/shared/graphql/queries/users";
-import { IProduct } from "@/shared/typedefs";
-import { Reference, StoreObject, useApolloClient, useMutation, useQuery } from "@apollo/client";
+import { Reference, StoreObject, useMutation, useQuery } from "@apollo/client";
 import { UUID } from "crypto";
-import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 export const useGetProductsBySeller = () => {
@@ -29,7 +27,7 @@ export const useDeleteProduct = (deleteProductId?: UUID) => {
               if (!existingProducts || !existingProducts.data) {
                 return existingProducts;
               }
-              
+
               return {
                 ...existingProducts,
                 data: existingProducts.data.filter(
@@ -62,20 +60,4 @@ export const useDeleteProduct = (deleteProductId?: UUID) => {
   return {
     onConfirm,
   };
-};
-
-export const useSelectApolloClientProduct = () => {
-  const client = useApolloClient();
-  const router = useRouter();
-
-  const selectApolloClientProduct = (product: IProduct) => {
-    client.writeQuery({
-      query: GET_SELECTED_PRODUCT,
-      data: { selectedProduct: product },
-    });
-
-    router.push(`/products/${product.id}/update`);
-  };
-
-  return { selectApolloClientProduct };
 };

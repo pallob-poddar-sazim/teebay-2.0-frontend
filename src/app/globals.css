@@ -11,10 +11,6 @@
   --color-blue: #3d92dc;
 }
 
-.button-secondary {
-  @apply px-4 py-2 rounded-md text-white cursor-pointer bg-raspberry;
-}
-
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

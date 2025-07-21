@@ -4,8 +4,6 @@ import { useQuery } from "@apollo/client";
 import { GET_LOCAL_USER } from "@/shared/graphql/queries/users";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import Dashboard from "@/app/(userAuth)/dashboard/page";
-import Signin from "@/app/(nonUserAuth)/signin/page";
 
 export default function IndexPage() {
   const router = useRouter();
@@ -16,5 +14,5 @@ export default function IndexPage() {
     router.prefetch("/signin");
   }, [router]);
 
-  return user?.localUser?.id ? <Dashboard /> : <Signin />;
+  return user?.localUser?.id ? router.push("/dashboard") : router.push("/signin");
 }

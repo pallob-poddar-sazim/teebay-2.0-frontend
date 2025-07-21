@@ -1,5 +1,5 @@
-import MultiPageFormBox from "@/components/templates/MultiPageFormBox";
+import ProductCreationContainer from "@/modules/product-creation/containers";
 
 export default function Page() {
-  return <MultiPageFormBox />;
+  return <ProductCreationContainer />;
 }

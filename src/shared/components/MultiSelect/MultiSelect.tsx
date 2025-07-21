@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { X, ChevronsUpDown } from "lucide-react";
 import { Button } from "../shadui/button";
-import { TMultiSelectProps, TOption } from "./MultiSelect.types";
+import { TMultiSelectProps } from "./MultiSelect.types";
+import { ICategory } from "@/shared/typedefs";
 
 const MultiSelect = (props: TMultiSelectProps) => {
-  const [selectedOptions, setSelectedOptions] = useState<TOption[]>(props.defaultSelected || []);
+  const [selectedOptions, setSelectedOptions] = useState<ICategory[]>(props.defaultSelected || []);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const hasInitialized = useRef(false);
@@ -30,7 +31,7 @@ const MultiSelect = (props: TMultiSelectProps) => {
     };
   }, []);
 
-  const selectOption = (option: TOption) => {
+  const selectOption = (option: ICategory) => {
     if (!selectedOptions.some((selected) => selected.id === option.id)) {
       const newSelectedOptions = [...selectedOptions, option];
       setSelectedOptions(newSelectedOptions);
@@ -38,7 +39,7 @@ const MultiSelect = (props: TMultiSelectProps) => {
     }
   };
 
-  const removeOption = (option: TOption) => {
+  const removeOption = (option: ICategory) => {
     const newSelectedOptions = selectedOptions.filter((prevOption) => prevOption.id !== option.id);
     setSelectedOptions(newSelectedOptions);
     props.onChange(newSelectedOptions);

@@ -1,8 +1,10 @@
-"use client";
-
-import IProduct from "@/interfaces/IProduct";
-import Card from "../organisms/Card";
+import { useTab } from "@/shared/components/Tab/Tab.hooks";
+import { GET_PURCHASES_BY_USER_ID } from "@/shared/graphql/queries/purchases";
+import { GET_RENTALS_BY_USER_ID } from "@/shared/graphql/queries/rentals";
+import { GET_LOCAL_USER } from "@/shared/graphql/queries/users";
+import { IPurchase, IRental } from "@/shared/typedefs";
 import { useQuery } from "@apollo/client";
+<<<<<<< HEAD:src/components/templates/TransactionHistory.tsx
 import { GET_PURCHASES_BY_USER_ID } from "@/graphql/queries/purchases";
 import { GET_RENTALS_BY_USER_ID } from "@/graphql/queries/rentals";
 import IPurchase from "@/interfaces/IPurchase";
@@ -14,7 +16,11 @@ const TransactionHistory = () => {
   const searchParams = useSearchParams();
 
   const activeTab = searchParams.get("tab") || "bought";
+=======
+>>>>>>> refactor/bulk-creation:src/modules/transaction-history/containers/TransactionHistoryContainer.hooks.ts
 
+export const useTransactionHistory = () => {
+  const { activeTab } = useTab();
   const { data: user } = useQuery(GET_LOCAL_USER);
   const { data: purchaseData } = useQuery(GET_PURCHASES_BY_USER_ID, {
     variables: { userId: user?.localUser.id },
@@ -49,17 +55,5 @@ const TransactionHistory = () => {
       ? borrowedProducts
       : lentProducts;
 
-  return (
-    <>
-      <div className="mx-auto max-w-4/5 md:max-w-3/5">
-        <div className="flex flex-col gap-6">
-          {products.map((product: IProduct) => (
-            <Card key={product.id} product={product} />
-          ))}
-        </div>
-      </div>
-    </>
-  );
+  return { products };
 };
-
-export default TransactionHistory;

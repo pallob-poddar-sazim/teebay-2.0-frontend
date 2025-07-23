@@ -20,7 +20,7 @@ const ProductDetailsContainer = () => {
   const [isMessageButtonOpen] = useState(
     user.localUser?.id !== productData.selectedProduct.seller.id,
   );
-  const { data: messages } = useQuery(GET_MESSAGES, {
+  useQuery(GET_MESSAGES, {
     variables: {
       participantIds: [user.localUser?.id, productData.selectedProduct.seller.id],
     },
@@ -57,8 +57,8 @@ const ProductDetailsContainer = () => {
     <>
       {isChatOpen && (
         <Chat
+          currentUserId={user.localUser?.id}
           chatPartner={productData.selectedProduct.seller}
-          messages={messages?.getMessages.data}
           onClose={() => setIsChatOpen(false)}
         />
       )}

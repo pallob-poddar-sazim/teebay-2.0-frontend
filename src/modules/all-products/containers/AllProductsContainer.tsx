@@ -4,7 +4,7 @@ import { IProduct } from "@/shared/typedefs";
 import Card from "@/shared/components/Card";
 import { useRouter } from "next/navigation";
 import { useSelectApolloClientProduct } from "@/shared/hooks/useSelectApolloClientProduct";
-import { useGetProducts } from "../hooks";
+import { useGetProducts } from "./AllProductsContainer.hooks";
 
 const AllProductsContainer = () => {
   const { products } = useGetProducts();

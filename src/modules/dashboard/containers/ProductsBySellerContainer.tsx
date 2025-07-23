@@ -4,7 +4,7 @@ import { IProduct } from "@/shared/typedefs";
 import Card from "@/shared/components/Card";
 import { useState } from "react";
 import Modal from "@/shared/components/Modal/Modal";
-import { useDeleteProduct, useGetProductsBySeller } from "../hooks/ProductsBySeller.hooks";
+import { useDeleteProduct, useGetProductsBySeller } from "./ProductsBySellerContainer.hooks";
 import { UUID } from "crypto";
 import { useSelectApolloClientProduct } from "@/shared/hooks/useSelectApolloClientProduct";
 import { useRouter } from "next/navigation";

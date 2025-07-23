@@ -1,33 +1,25 @@
-import { Key, useEffect, useRef, useState } from "react";
-import { UUID } from "crypto";
-import IConversation from "@/interfaces/IConversation";
+import { Key, useEffect, useRef } from "react";
+import { IConversation } from "@/shared/typedefs";
+import { TInboxProps } from "./Inbox.types";
 
-type Props = {
-  userId: UUID;
-  conversations: IConversation[];
-  triggerRef?: React.RefObject<HTMLElement | null>;
-  onConversationSelect: (conversation: IConversation) => void;
-  onClose: () => void;
-};
-
-const Inbox = (props: Props) => {
+const Inbox = (props: TInboxProps) => {
   const inboxRef = useRef<HTMLElement>(null);
+  const { triggerRef, onClose } = props;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         inboxRef.current &&
         !inboxRef.current.contains(event.target as Node) &&
-        (!props.triggerRef ||
-          !props.triggerRef.current?.contains(event.target as Node))
+        (!triggerRef || !triggerRef.current?.contains(event.target as Node))
       ) {
-        props.onClose();
+        onClose();
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [props.onClose]);
+  }, [triggerRef, onClose]);
 
   return (
     <article
@@ -42,11 +34,7 @@ const Inbox = (props: Props) => {
           className="mx-1 px-3 py-2 rounded-md hover:bg-gray-100 cursor-pointer"
         >
           <p className="font-medium">
-            {
-              conversation.participants.find(
-                (participant) => participant.id !== props.userId
-              )?.name
-            }
+            {conversation.participants.find((participant) => participant.id !== props.userId)?.name}
           </p>
           <div className="flex items-center text-light text-sm text-gray-500">
             {props.userId === conversation.lastMessage.sender.id && "You: "}

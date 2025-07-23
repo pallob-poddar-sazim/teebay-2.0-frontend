@@ -9,7 +9,12 @@ import { X, SendHorizonal } from "lucide-react";
 const Chat = (props: TChatProps) => {
   const [messages, setMessages] = useState<IMessage[]>([]);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const { form, onSubmit } = useChatForm(props.currentUserId, props.chatPartner.id, setMessages);
+  const { form, onSubmit } = useChatForm({
+    setMessages,
+    conversationId: props.conversationId,
+    currentUserId: props.currentUserId,
+    chatPartnerId: props.chatPartner?.id,
+  });
 
   const errors = form.formState.errors;
   const textValue = form.watch("text");
@@ -24,7 +29,7 @@ const Chat = (props: TChatProps) => {
   return (
     <article className="fixed bottom-0 right-10 z-2 w-80 h-100 bg-white rounded-xl shadow-xl flex flex-col">
       <div className="p-3 flex items-center justify-between gap-2 border-b border-gray">
-        <p>{props.chatPartner.name}</p>
+        <p>{props.chatPartner?.name}</p>
         <Button variant={"ghost"} onClick={props.onClose}>
           <X />
         </Button>
@@ -35,7 +40,7 @@ const Chat = (props: TChatProps) => {
           <p
             key={index}
             className={`px-3 py-2 w-fit max-w-7/10 rounded-full text-sm ${
-              props.chatPartner.id === message.sender.id ? "mr-auto bg-gray" : "ml-auto bg-blue"
+              props.chatPartner?.id === message.sender.id ? "mr-auto bg-gray" : "ml-auto bg-blue"
             }`}
           >
             {message.text}

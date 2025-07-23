@@ -46,6 +46,7 @@ const Nav = () => {
 
       {isChatOpen && chatPartner && (
         <Chat
+          conversationId={selectedConversation?.id}
           currentUserId={user.localUser?.id}
           chatPartner={chatPartner}
           onClose={() => setIsChatOpen(false)}

@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_MESSAGES = gql`
-  query GetMessages($participantIds: [ID!]!) {
-    getMessages(participantIds: $participantIds) {
+  query GetMessages($conversationId: String, $participantIds: [ID!]) {
+    getMessages(conversationId: $conversationId, participantIds: $participantIds) {
       success
       message
       data {

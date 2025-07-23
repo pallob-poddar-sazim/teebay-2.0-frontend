@@ -1,17 +1,14 @@
 import { SEND_MESSAGE } from "@/shared/graphql/mutations/messages";
 import { GET_MESSAGES } from "@/shared/graphql/queries/messages";
 import { MESSAGE_SENT } from "@/shared/graphql/subscriptions/messages";
-import { IMessage } from "@/shared/typedefs";
 import { useMutation, useQuery, useSubscription } from "@apollo/client";
-import { UUID } from "crypto";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { TUseChatFormProps } from "./Chat.types";
 
-export const useChatForm = (
-  currentUserId: UUID,
-  chatPartnerId: UUID,
-  setMessages: { (value: SetStateAction<IMessage[]>): void },
-) => {
+export const useChatForm = (props: TUseChatFormProps) => {
+  const { setMessages, conversationId, currentUserId, chatPartnerId } = props;
+
   const form = useForm({
     mode: "onChange",
     defaultValues: {
@@ -20,12 +17,12 @@ export const useChatForm = (
   });
   const [sendMessage] = useMutation(SEND_MESSAGE);
   const { data: messageData } = useQuery(GET_MESSAGES, {
-    variables: {
-      participantIds: [currentUserId, chatPartnerId],
-    },
-    fetchPolicy: "network-only",
+    variables: conversationId
+      ? { conversationId }
+      : { participantIds: [currentUserId, chatPartnerId] },
+    skip: !conversationId && (!currentUserId || !chatPartnerId),
+    fetchPolicy: "cache-and-network",
   });
-  const [conversationId, setConversationId] = useState<string | null>(null);
 
   const subscriptionVariables = conversationId
     ? { conversationId }
@@ -44,11 +41,9 @@ export const useChatForm = (
 
   useEffect(() => {
     if (messageData?.getMessages?.data?.[0]?.conversation?.id) {
-      const id = messageData.getMessages.data[0].conversation.id;
-      setConversationId(id);
       setMessages(messageData.getMessages.data);
     }
-  }, [messageData, setMessages]);
+  }, [messageData?.getMessages.data, setMessages]);
 
   const handlerOnSubmit = async (values: { text: string }) => {
     try {

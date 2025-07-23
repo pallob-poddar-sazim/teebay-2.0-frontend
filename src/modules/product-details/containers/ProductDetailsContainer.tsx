@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_SELECTED_PRODUCT } from "@/shared/graphql/queries/products";
 import { GET_LOCAL_USER } from "@/shared/graphql/queries/users";
-import { GET_MESSAGES } from "@/shared/graphql/queries/messages";
 import { toast } from "react-toastify";
 import Modal from "@/shared/components/Modal";
 import Chat from "@/shared/components/Chat";
@@ -20,11 +19,6 @@ const ProductDetailsContainer = () => {
   const [isMessageButtonOpen] = useState(
     user.localUser?.id !== productData.selectedProduct.seller.id,
   );
-  useQuery(GET_MESSAGES, {
-    variables: {
-      participantIds: [user.localUser?.id, productData.selectedProduct.seller.id],
-    },
-  });
   const { onCreateRental } = useCreateRental();
   const { onCreatePurchase } = useCreatePurchase();
 

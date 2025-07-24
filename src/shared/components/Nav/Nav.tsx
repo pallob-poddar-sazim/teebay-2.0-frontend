@@ -11,20 +11,23 @@ const Nav = () => {
   const { signout } = useSignout();
 
   return (
-    <nav className="flex justify-end gap-4 mx-6 my-4">
-      <Link href={`/users/${user.localUser?.id}/products/history`} className="text-blue">
-        <Button>TRANSACTIONS</Button>
+    <nav className="flex justify-end gap-4 mx-6 mt-4 mb-8">
+      <Link href={`/`} className="text-blue">
+        <Button variant={"ghost"}>DASHBOARD</Button>
       </Link>
       <Link href={"/products"} className="text-blue">
-        <Button>ALL PRODUCTS</Button>
+        <Button variant={"ghost"}>ALL PRODUCTS</Button>
       </Link>
       <Link href={"/products/creation"} className="text-blue">
-        <Button>ADD PRODUCT</Button>
+        <Button variant={"ghost"}>ADD PRODUCT</Button>
       </Link>
       <Link href={"/products/bulk-creation"} className="text-blue">
-        <Button>BULK CREATE</Button>
+        <Button variant={"ghost"}>BULK CREATE</Button>
       </Link>
-      <Button variant={"destructive"} onClick={signout}>
+      <Link href={`/users/${user.localUser?.id}/products/history`} className="text-blue">
+        <Button variant={"ghost"}>TRANSACTIONS</Button>
+      </Link>
+      <Button variant={"ghost"} onClick={signout} className="text-destructive">
         LOGOUT
       </Button>
     </nav>

@@ -1,5 +1,11 @@
 import ProductsBySellerContainer from "@/modules/dashboard/containers";
+import Nav from "@/shared/components/Nav";
 
 export default function Page() {
-  return <ProductsBySellerContainer />;
+  return (
+    <>
+      <Nav />
+      <ProductsBySellerContainer />
+    </>
+  );
 }

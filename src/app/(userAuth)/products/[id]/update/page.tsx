@@ -1,5 +1,5 @@
-import ProductUpdateLayout from "@/components/templates/ProductUpdateLayout";
+import ProductUpdateContainer from "@/modules/product-update/containers";
 
 export default function Page() {
-  return <ProductUpdateLayout />;
-};
+  return <ProductUpdateContainer />;
+}

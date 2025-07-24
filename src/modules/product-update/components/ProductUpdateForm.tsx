@@ -11,8 +11,8 @@ import { Button } from "@/shared/components/shadui/button";
 import { useProductUpdateForm } from "./ProductUpdateForm.hooks";
 import { GET_SELECTED_PRODUCT } from "@/shared/graphql/queries/products";
 import { IProduct } from "@/shared/typedefs";
+import { rentOptions } from "./ProductUpdateForm.helpers";
 import { Textarea } from "@/shared/components/shadui/textarea";
-import { rentOptions } from "@/shared/constants/app.constants";
 
 const ProductUpdateForm = () => {
   const { data: ProductDetails } = useQuery(GET_SELECTED_PRODUCT);

@@ -7,6 +7,12 @@ export const GET_MESSAGES = gql`
       message
       data {
         id
+<<<<<<< HEAD
+=======
+        conversation {
+          id
+        }
+>>>>>>> e47e558 (feat: integrate get messages api in chat service)
         sender {
           id
         }

@@ -26,7 +26,11 @@ const Modal = (props: TModalProps) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+<<<<<<< HEAD
   }, [props]);
+=======
+  }, [props.onClose]);
+>>>>>>> main
 
   const handlerOnSubmit = async (formData: TRentalFormFields) => {
     props.onConfirm(formData.rentStartDate, formData.rentEndDate);

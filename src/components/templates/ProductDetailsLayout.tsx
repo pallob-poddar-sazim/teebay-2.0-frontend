@@ -21,7 +21,6 @@ const ProductDetailsLayout = () => {
   const [createPurchase, { error: purchaseError }] =
     useMutation(CREATE_PURCHASE);
   const { data: user } = useQuery(GET_LOCAL_USER);
-<<<<<<< HEAD
   const [isMessageButtonOpen] = useState(
     user.localUser?.id !== productData.selectedProduct.seller.id
   );
@@ -33,11 +32,6 @@ const ProductDetailsLayout = () => {
       ],
     },
   });
-=======
-  const [isMessageButtonVisible] = useState(
-    user.localUser?.id !== productData.selectedProduct.seller.id
-  );
->>>>>>> e47e558 (feat: integrate get messages api in chat service)
 
   if (rentalError) {
     toast.error(rentalError.message);
@@ -98,13 +92,8 @@ const ProductDetailsLayout = () => {
     <>
       {isChatOpen && (
         <Chat
-<<<<<<< HEAD
           chatPartner={productData.selectedProduct.seller}
           messages={messages?.getMessages.data}
-=======
-          currentUserId={user.localUser?.id}
-          chatPartner={productData.selectedProduct.seller}
->>>>>>> e47e558 (feat: integrate get messages api in chat service)
           onClose={() => setIsChatOpen(false)}
         />
       )}
@@ -118,19 +107,11 @@ const ProductDetailsLayout = () => {
       <div className="max-w-4/5 mx-auto my-20">
         <ProductDetailsSection product={productData?.selectedProduct} />
         <div className="flex justify-end gap-6 mt-10">
-<<<<<<< HEAD
           {isMessageButtonOpen && (
             <Button
               variant="button-primary"
               text="Message"
               onClick={() => setIsChatOpen(!isChatOpen)}
-=======
-          {isMessageButtonVisible && !isChatOpen && (
-            <Button
-              variant="button-primary"
-              text="Message"
-              onClick={() => !isChatOpen && setIsChatOpen(true)}
->>>>>>> e47e558 (feat: integrate get messages api in chat service)
             />
           )}
           <Button variant="button-primary" text="Rent" onClick={handleRent} />

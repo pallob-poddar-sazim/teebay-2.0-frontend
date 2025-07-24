@@ -10,14 +10,19 @@ import { GET_LOCAL_USER } from "@/graphql/queries/users";
 import { CREATE_PURCHASE } from "@/graphql/mutations/purchase";
 import { toast } from "react-toastify";
 import Modal from "../organisms/Modal";
+import Chat from "../organisms/Chat";
 
 const ProductDetailsLayout = () => {
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const { data: productData } = useQuery(GET_SELECTED_PRODUCT);
   const [modalVariant, setModalVariant] = useState<"buy" | "rent" | null>(null);
   const [createRental, { error: rentalError }] = useMutation(CREATE_RENTAL);
   const [createPurchase, { error: purchaseError }] =
     useMutation(CREATE_PURCHASE);
   const { data: user } = useQuery(GET_LOCAL_USER);
+  const [isMessageButtonVisible] = useState(
+    user.localUser?.id !== productData.selectedProduct.seller.id
+  );
 
   if (rentalError) {
     toast.error(rentalError.message);
@@ -76,6 +81,13 @@ const ProductDetailsLayout = () => {
 
   return (
     <>
+      {isChatOpen && (
+        <Chat
+          currentUserId={user.localUser?.id}
+          chatPartner={productData.selectedProduct.seller}
+          onClose={() => setIsChatOpen(false)}
+        />
+      )}
       {modalVariant && (
         <Modal
           variant={modalVariant}
@@ -86,6 +98,13 @@ const ProductDetailsLayout = () => {
       <div className="max-w-4/5 mx-auto my-20">
         <ProductDetailsSection product={productData?.selectedProduct} />
         <div className="flex justify-end gap-6 mt-10">
+          {isMessageButtonVisible && !isChatOpen && (
+            <Button
+              variant="button-primary"
+              text="Message"
+              onClick={() => !isChatOpen && setIsChatOpen(true)}
+            />
+          )}
           <Button variant="button-primary" text="Rent" onClick={handleRent} />
           <Button variant="button-primary" text="Buy" onClick={handleBuy} />
         </div>

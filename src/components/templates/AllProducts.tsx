@@ -5,7 +5,7 @@ import Card from "../organisms/Card";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_PRODUCTS } from "@/graphql/queries/products";
 import { useApolloClient } from "@apollo/client";
-import IPurchase from "@/interfaces/Ipurchase";
+import IPurchase from "@/interfaces/IPurchase";
 import IRental from "@/interfaces/IRental";
 import { GET_SELECTED_PRODUCT } from "@/graphql/queries/products";
 import { useRouter } from "next/navigation";

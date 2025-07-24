@@ -2,6 +2,9 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 @theme {
   --color-raspberry: #d3455b;
@@ -9,10 +12,6 @@
   --color-slate-gray: #6f7d89;
   --color-jet-black: #293845;
   --color-blue: #3d92dc;
-}
-
-.button-secondary {
-  @apply px-4 py-2 rounded-md text-white cursor-pointer bg-raspberry;
 }
 
 @theme inline {

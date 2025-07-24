@@ -2,8 +2,8 @@
 
 import { ToastContainer } from "react-toastify";
 
-const ToastContainerWrapper = () => {
+const Toaster = () => {
   return <ToastContainer />;
 };
 
-export default ToastContainerWrapper;
+export default Toaster;

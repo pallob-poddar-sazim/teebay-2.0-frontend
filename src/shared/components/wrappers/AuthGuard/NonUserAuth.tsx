@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@apollo/client";
-import { GET_LOCAL_USER } from "@/graphql/queries/users";
+import { GET_LOCAL_USER } from "@/shared/graphql/queries/users";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 

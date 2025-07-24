@@ -1,15 +1,7 @@
-import { JSX } from "react";
 import Link from "next/link";
+import { TFormContainerProps } from "./FormContainer.types";
 
-type Props = {
-  title: string;
-  form: () => JSX.Element;
-  text: string;
-  link: string;
-  linkText: string;
-};
-
-const FormBox = (props: Props) => {
+const FormContainer = (props: TFormContainerProps) => {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="flex flex-col p-12 border-2 border-gray rounded-xs">
@@ -28,4 +20,4 @@ const FormBox = (props: Props) => {
   );
 };
 
-export default FormBox;
+export default FormContainer;

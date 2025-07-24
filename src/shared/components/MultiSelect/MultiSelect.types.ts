@@ -1,12 +1,9 @@
-export type TOption = {
-  id: string;
-  name: string;
-};
+import { ICategory } from "@/shared/typedefs";
 
 export type TMultiSelectProps = {
   placeholder: string;
-  options: TOption[];
-  onChange: (selected: TOption[]) => void;
+  options: ICategory[];
+  onChange: (selected: ICategory[]) => void;
   error?: boolean;
-  defaultSelected?: TOption[];
+  defaultSelected?: ICategory[];
 };

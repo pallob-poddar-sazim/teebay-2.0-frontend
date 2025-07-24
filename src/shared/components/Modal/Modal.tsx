@@ -35,7 +35,11 @@ const Modal = (props: TModalProps) => {
 <<<<<<< HEAD
   }, [props]);
 =======
+<<<<<<< HEAD
+  }, [props]);
+=======
   }, [props.onClose]);
+>>>>>>> main
 >>>>>>> main
 >>>>>>> main
 >>>>>>> main

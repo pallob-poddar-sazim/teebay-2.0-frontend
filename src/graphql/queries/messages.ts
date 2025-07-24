@@ -7,9 +7,6 @@ export const GET_MESSAGES = gql`
       message
       data {
         id
-        conversation {
-          id
-        }
         sender {
           id
         }

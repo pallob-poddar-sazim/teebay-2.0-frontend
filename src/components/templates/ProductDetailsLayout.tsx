@@ -8,6 +8,7 @@ import { GET_SELECTED_PRODUCT } from "@/graphql/queries/products";
 import { CREATE_RENTAL } from "@/graphql/mutations/rental";
 import { GET_LOCAL_USER } from "@/graphql/queries/users";
 import { CREATE_PURCHASE } from "@/graphql/mutations/purchase";
+import { GET_MESSAGES } from "@/graphql/queries/messages";
 import { toast } from "react-toastify";
 import Modal from "../organisms/Modal";
 import Chat from "../organisms/Chat";
@@ -20,9 +21,17 @@ const ProductDetailsLayout = () => {
   const [createPurchase, { error: purchaseError }] =
     useMutation(CREATE_PURCHASE);
   const { data: user } = useQuery(GET_LOCAL_USER);
-  const [isMessageButtonVisible] = useState(
+  const [isMessageButtonOpen] = useState(
     user.localUser?.id !== productData.selectedProduct.seller.id
   );
+  const { data: messages } = useQuery(GET_MESSAGES, {
+    variables: {
+      participantIds: [
+        user.localUser?.id,
+        productData.selectedProduct.seller.id,
+      ],
+    },
+  });
 
   if (rentalError) {
     toast.error(rentalError.message);
@@ -83,8 +92,8 @@ const ProductDetailsLayout = () => {
     <>
       {isChatOpen && (
         <Chat
-          currentUserId={user.localUser?.id}
           chatPartner={productData.selectedProduct.seller}
+          messages={messages?.getMessages.data}
           onClose={() => setIsChatOpen(false)}
         />
       )}
@@ -98,11 +107,11 @@ const ProductDetailsLayout = () => {
       <div className="max-w-4/5 mx-auto my-20">
         <ProductDetailsSection product={productData?.selectedProduct} />
         <div className="flex justify-end gap-6 mt-10">
-          {isMessageButtonVisible && !isChatOpen && (
+          {isMessageButtonOpen && (
             <Button
               variant="button-primary"
               text="Message"
-              onClick={() => !isChatOpen && setIsChatOpen(true)}
+              onClick={() => setIsChatOpen(!isChatOpen)}
             />
           )}
           <Button variant="button-primary" text="Rent" onClick={handleRent} />

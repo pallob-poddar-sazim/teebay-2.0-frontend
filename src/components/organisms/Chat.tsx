@@ -20,9 +20,8 @@ import { UUID } from "crypto";
 import { useMessages } from "@/hooks/useMessages";
 
 type Props = {
-  currentUserId: UUID;
   chatPartner: {
-    id: UUID;
+    id: string;
     name: string;
   };
 >>>>>>> e47e558 (feat: integrate get messages api in chat service)
@@ -190,12 +189,14 @@ const Chat = (props: Props) => {
                 autoFocus
                 autoComplete="off"
                 {...field}
-                className="px-3 py-2 w-full rounded-full bg-gray-100"
+                className="px-3 py-2 w-full rounded-full bg-gray-200"
               />
             )}
           />
-          {errors.text && (
-            <p className="text-sm text-red-500 my-1">{errors.text.message}</p>
+          {errors.message && (
+            <p className="text-sm text-red-500 my-1">
+              {errors.message.message}
+            </p>
           )}
         </div>
 

@@ -88,6 +88,7 @@ const Nav = () => {
   });
 
   return (
+<<<<<<< HEAD
     <nav className="flex justify-end gap-4 mx-6 my-4">
       <Link
         href={`/users/${user.localUser?.id}/products/history`}
@@ -110,6 +111,53 @@ const Nav = () => {
         onClick={handleSignOut}
       />
     </nav>
+=======
+    <div className="relative mx-6 my-4">
+      <nav className="flex items-center justify-end gap-4">
+        <Button
+          text="LOGOUT"
+          variant="button-secondary"
+          onClick={handleSignOut}
+        />
+        <Link
+          href={`/users/${user.localUser?.id}/products/history`}
+          className="text-blue"
+        >
+          <Button text="TRANSACTIONS" variant="button-primary" />
+        </Link>
+        <Link href={"/products"} className="text-blue">
+          <Button text="ALL PRODUCTS" variant="button-primary" />
+        </Link>
+        <Link href={"/products/creation"} className="text-blue">
+          <Button text="ADD PRODUCT" variant="button-primary" />
+        </Link>
+        <Button
+          ref={chatButtonRef}
+          onClick={() => setIsInboxOpen(!isInboxOpen)}
+          className="cursor-pointer"
+        >
+          <ChatIcon className="size-10 fill-purple" />
+        </Button>
+      </nav>
+      {isInboxOpen && (
+        <Inbox
+          userId={user.localUser?.id}
+          conversations={conversations}
+          triggerRef={chatButtonRef}
+          onConversationSelect={handleConversationSelect}
+          onClose={() => setIsInboxOpen(false)}
+        />
+      )}
+
+      {isChatOpen && chatPartner && (
+        <Chat
+          currentUserId={user.localUser?.id}
+          chatPartner={chatPartner}
+          onClose={() => setIsChatOpen(false)}
+        />
+      )}
+    </div>
+>>>>>>> e47e558 (feat: integrate get messages api in chat service)
   );
 };
 

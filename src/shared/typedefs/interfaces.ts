@@ -1,5 +1,7 @@
+import { UUID } from "crypto";
+
 export interface IUser {
-  id: string;
+  id: UUID;
   name: string;
   email: string;
   phone: string;
@@ -7,14 +9,14 @@ export interface IUser {
 }
 
 export interface IProduct {
-  id: string;
+  id: UUID;
   title: string;
   description: string;
   price: number;
   rent: number;
   rentOption: "hr" | "day";
   categories: {
-    id: string;
+    id: UUID;
     name: string;
   }[];
   seller: IUser;
@@ -42,4 +44,3 @@ export interface IMessage {
   };
   text: string;
 }
-

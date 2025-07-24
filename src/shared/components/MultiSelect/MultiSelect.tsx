@@ -6,6 +6,9 @@ import { Button } from "../shadui/button";
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> main
 >>>>>>> main
 >>>>>>> main
 import { TMultiSelectProps } from "./MultiSelect.types";
@@ -17,11 +20,14 @@ const MultiSelect = (props: TMultiSelectProps) => {
 =======
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
 =======
 import { TMultiSelectProps, TOption } from "./MultiSelect.types";
 
 const MultiSelect = (props: TMultiSelectProps) => {
   const [selectedOptions, setSelectedOptions] = useState<TOption[]>(props.defaultSelected || []);
+>>>>>>> main
 >>>>>>> main
 >>>>>>> main
 >>>>>>> main
@@ -59,7 +65,11 @@ const MultiSelect = (props: TMultiSelectProps) => {
 <<<<<<< HEAD
   const selectOption = (option: ICategory) => {
 =======
+<<<<<<< HEAD
+  const selectOption = (option: ICategory) => {
+=======
   const selectOption = (option: TOption) => {
+>>>>>>> main
 >>>>>>> main
 >>>>>>> main
 >>>>>>> main
@@ -79,7 +89,11 @@ const MultiSelect = (props: TMultiSelectProps) => {
 <<<<<<< HEAD
   const removeOption = (option: ICategory) => {
 =======
+<<<<<<< HEAD
+  const removeOption = (option: ICategory) => {
+=======
   const removeOption = (option: TOption) => {
+>>>>>>> main
 >>>>>>> main
 >>>>>>> main
 >>>>>>> main

@@ -42,10 +42,19 @@ export interface IPurchase {
   buyer: IUser;
 }
 
+export interface IConversation {
+  id: string;
+  participants: {
+    id: UUID;
+    name: string;
+  }[];
+  lastMessage: IMessage;
+}
+
 export interface IMessage {
   id: string;
   sender: {
-    id: string;
+    id: UUID;
   };
   text: string;
 }
